@@ -1,2 +1,6 @@
+.PHONY: all clean
 all:
-	g++ main.cpp pch.h -o project -lglut -lGLU -lGL -lm
+	g++ main.cpp door.cpp utils.cpp cgproject.h -o cgproject -lglut -lGLU -lGL -lm
+
+clean:
+	rm cgproject
