@@ -11,6 +11,7 @@
 #include <GL/glu.h>
 #include <GL/glut.h>
 
+#include "RgbImage.h"
 #include "door.h"
 #include "utils.h"
 
@@ -39,9 +40,15 @@
 #define BROWN 0.6f, 0.3f, 0.0f, 1.0f
 
 // Speeds
-#define CAMERA_SPEED 0.1f
-#define ZOOM_SPEED 0.1f
+
+#define CAMERA_FOV_Y (GLfloat)95
+#define CAMERA_FOV_X (GLfloat)(CANVAS_WIDTH / CANVAS_HEIGHT)
+
+#define CAMERA_SPEED 0.5f
+#define ZOOM_SPEED 0.5f
 #define ANGLE_SPEED 0.1f
 #define ROTATE_SPEED 1.0f
+
+extern GLuint texture[6];
 
 #endif // __CG_PROJECT_PCH

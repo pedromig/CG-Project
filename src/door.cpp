@@ -3,11 +3,12 @@
 GLfloat door_angle = 0;
 GLfloat cat_door_angle = 0;
 GLfloat handle_angle = 0;
+GLfloat latch_dx = 0;
 
 void draw_door_handle() {
     glPushMatrix();
     {
-        glTranslatef(0, 0, 0.5);
+        glTranslatef(0, 0, 0.3);
         glScalef(0.2, 0.2, 0.8);
         draw_cylinder(1, 1);
     }
@@ -15,7 +16,7 @@ void draw_door_handle() {
 
     glPushMatrix();
     {
-        glTranslatef(-0.2, 0, 0.9);
+        glTranslatef(-0.30, 0, 0.7);
         glRotatef(-90, 0, 1, 0);
         glScalef(0.2, 0.2, 1);
         draw_cylinder(1, 1);
@@ -24,125 +25,139 @@ void draw_door_handle() {
 }
 
 void door(GLfloat x, GLfloat y, GLfloat z, GLfloat angle) {
+
     glPushMatrix();
     {
+
+        glBlendFunc(GL_ONE, GL_ZERO);
         glTranslatef(x, y, z);
         glRotatef(angle + door_angle, 0, 1, 0);
         glTranslatef(4, 0.5, z);
 
         // Door Base
-        glColor4f(BROWN);
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, texture[1]);
+        select_material(DEFAULT);
         glPushMatrix();
         {
             glScalef(8, 1, 0.3);
-            glutSolidCube(1);
+            draw_cube(1, true);
         }
         glPopMatrix();
 
         // Cat Door Left
-        glColor4f(BROWN);
+        select_material(DEFAULT);
         glPushMatrix();
         {
             glTranslatef(-2.5, 2, 0);
             glScalef(3, 3, 0.3);
-            glutSolidCube(1);
+
+            draw_cube(1, true);
         }
         glPopMatrix();
 
         // Cat Door Right
-        glColor4f(BROWN);
+        select_material(DEFAULT);
         glPushMatrix();
         {
             glTranslatef(2.5, 2, 0);
             glScalef(3, 3, 0.3);
-            glutSolidCube(1);
+            draw_cube(1, true);
         }
         glPopMatrix();
 
+        select_material(PLASTIC);
         // Cat Door
-        glColor4f(BLUE);
+        glBindTexture(GL_TEXTURE_2D, texture[0]);
         glPushMatrix();
         {
-            glTranslatef(0, 3.5, 0);
+            GLfloat shift_rotation_center = cat_door_angle > 0 ? 0.15f : -0.15f;
+
+            glTranslatef(0, 3.5, -shift_rotation_center);
             glRotatef(cat_door_angle, 1.0f, 0.0f, 0.0f);
-            glTranslatef(0, -1.5, 0);
+            glTranslatef(0, -1.5, shift_rotation_center);
             glScalef(2, 3, 0.3);
-            glutSolidCube(1);
+            draw_cube(1, true);
         }
         glPopMatrix();
 
-        // Cat Door/Textures Separator
-        glColor4f(BROWN);
+        // Cat Door texture separator
+        glBindTexture(GL_TEXTURE_2D, texture[1]);
+        select_material(DEFAULT);
         glPushMatrix();
         {
             glTranslatef(0, 4, 0);
             glScalef(8, 1, 0.3);
-            glutSolidCube(1);
+
+            draw_cube(1, true);
         }
         glPopMatrix();
 
         // Texture Section Left
-        glColor4f(BROWN);
+        select_material(DEFAULT);
         glPushMatrix();
         {
             glTranslatef(-3.25, 6.5, 0);
             glScalef(1.5, 4, 0.3);
-            glutSolidCube(1);
+            draw_cube(1, true);
         }
         glPopMatrix();
 
         // Texture Rectangle 1
-        glColor4f(RED);
+        select_material(DEFAULT);
         glPushMatrix();
         {
             glTranslatef(-1.5, 6.5, 0);
             glScalef(2, 4, 0.3);
-            glutSolidCube(1);
+            draw_cube(1, true);
         }
         glPopMatrix();
 
         // Texture Section Middle
-        glColor4f(BROWN);
+        select_material(DEFAULT);
         glPushMatrix();
         {
             glTranslatef(0, 6.5, 0);
             glScalef(1, 4, 0.3);
-            glutSolidCube(1);
+            draw_cube(1, true);
         }
         glPopMatrix();
 
         // Texture Rectangle 2
-        glColor4f(RED);
+        select_material(DEFAULT);
         glPushMatrix();
         {
             glTranslatef(1.5, 6.5, 0);
             glScalef(2, 4, 0.3);
-            glutSolidCube(1);
+
+            draw_cube(1, true);
         }
         glPopMatrix();
 
         // Texture Section Right
-        glColor4f(BROWN);
+        select_material(DEFAULT);
         glPushMatrix();
         {
             glTranslatef(3.25, 6.5, 0);
             glScalef(1.5, 4, 0.3);
-            glutSolidCube(1);
+
+            draw_cube(1, true);
         }
         glPopMatrix();
 
         // Door Handle Section
-        glColor4f(BROWN);
+        select_material(DEFAULT);
         glPushMatrix();
         {
             glTranslatef(0, 9.5, 0);
             glScalef(8, 2, 0.3);
-            glutSolidCube(1);
+            draw_cube(1, true);
         }
         glPopMatrix();
 
         // Handle Location
-        glColor4f(GRAY);
+        glDisable(GL_TEXTURE_2D);
+        select_material(CHROME);
         glPushMatrix();
         {
             glTranslatef(3, 9.5, 0);
@@ -151,8 +166,19 @@ void door(GLfloat x, GLfloat y, GLfloat z, GLfloat angle) {
         }
         glPopMatrix();
 
+        // Door Latch
+        select_material(CHROME);
+        glPushMatrix();
+        {
+            glTranslatef(4 - latch_dx, 9.5, 0);
+            glScalef(0.3, 0.3, 0.05);
+
+            draw_cube(1, true);
+        }
+        glPopMatrix();
+
         // Door Handle
-        glColor4f(BLUE);
+        select_material(CHROME);
         glPushMatrix();
         {
             glTranslatef(3, 9.5, 0);
@@ -164,75 +190,87 @@ void door(GLfloat x, GLfloat y, GLfloat z, GLfloat angle) {
         glPopMatrix();
 
         // Glass section
+        glEnable(GL_TEXTURE_2D);
+        glBindTexture(GL_TEXTURE_2D, texture[1]);
         for (int i = 0; i < 3; ++i) {
-            glColor4f(BROWN);
+
+            select_material(DEFAULT);
             glPushMatrix();
             {
                 glTranslatef(-3.1, 11.5 + 2.5 * i, 0);
                 glScalef(1.8, 2, 0.3);
-                glutSolidCube(1);
+                draw_cube(1, true);
             }
             glPopMatrix();
 
-            glColor4f(BROWN);
+            select_material(DEFAULT);
             glPushMatrix();
             {
                 glTranslatef(3.1, 11.5 + 2.5 * i, 0);
                 glScalef(1.8, 2, 0.3);
-                glutSolidCube(1);
-            }
-            glPopMatrix();
-
-            // Left Window
-            glColor4f(CYAN);
-            glPushMatrix();
-            {
-                glTranslatef(-1.2, 11.5 + 2.5 * i, 0);
-                glScalef(2, 2, 0.3);
-                glutSolidCube(1);
+                draw_cube(1, true);
             }
             glPopMatrix();
 
             // Window Separator
-            glColor4f(BROWN);
+            select_material(DEFAULT);
             glPushMatrix();
             {
                 glTranslatef(0, 11.5 + 2.5 * i, 0);
                 glScalef(0.4, 2, 0.3);
-                glutSolidCube(1);
-            }
-            glPopMatrix();
-
-            // Right Window
-            glColor4f(CYAN);
-            glPushMatrix();
-            {
-                glTranslatef(1.2, 11.5 + 2.5 * i, 0);
-                glScalef(2, 2, 0.3);
-                glutSolidCube(1);
+                draw_cube(1, true);
             }
             glPopMatrix();
 
             // Top
-            glColor4f(BROWN);
+            select_material(DEFAULT);
             glPushMatrix();
             {
                 glTranslatef(0, 12.75 + 2.5 * i, 0);
                 glScalef(8, 0.5, 0.3);
-                glutSolidCube(1);
+                draw_cube(1, true);
             }
             glPopMatrix();
         }
 
         // Top
-        glColor4f(BROWN);
         glPushMatrix();
         {
             glTranslatef(0, 18.25, 0);
             glScalef(8, 0.5, 0.3);
-            glutSolidCube(1);
+            select_material(DEFAULT);
+            draw_cube(1, true);
         }
         glPopMatrix();
+
+        // Glass Windows
+        glBindTexture(GL_TEXTURE_2D, texture[2]);
+        
+        glEnable(GL_COLOR_MATERIAL);
+        glColorMaterial(GL_FRONT_AND_BACK, GL_DIFFUSE);
+        glColor4f(0.10754, 0.10754, 0.2054, 0.3);
+        glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        for (int i = 0; i < 3; ++i) {
+            // Left Window
+            glPushMatrix();
+            {
+                glTranslatef(-1.2, 11.5 + 2.5 * i, 0);
+                glScalef(2, 2, 0.3);
+                draw_cube(1, true);
+            }
+            glPopMatrix();
+
+            // Right Window
+            glPushMatrix();
+            {
+                glTranslatef(1.2, 11.5 + 2.5 * i, 0);
+                glScalef(2, 2, 0.3);
+                draw_cube(1, true);
+            }
+            glPopMatrix();
+        }
+        glDisable(GL_COLOR_MATERIAL);
+        glDisable(GL_TEXTURE_2D);
     }
     glPopMatrix();
 }
