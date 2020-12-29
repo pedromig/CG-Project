@@ -1,3 +1,11 @@
+/**
+ * Licenciatura em Engenharia Informática | Faculdade de Ciências e Tecnologia da Universidade de Coimbra
+ * Projeto de Computação Gráfica - Porta 2020/2021
+ *
+ * 2018283166 Pedro Miguel Duque Rodrigues
+ *   
+*/
+
 #ifndef __CG_PROJECT_PCH
 #define __CG_PROJECT_PCH
 

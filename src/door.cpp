@@ -1,3 +1,11 @@
+/**
+ * Licenciatura em Engenharia Informática | Faculdade de Ciências e Tecnologia da Universidade de Coimbra
+ * Projeto de Computação Gráfica - Porta 2020/2021
+ *
+ * 2018283166 Pedro Miguel Duque Rodrigues
+ *   
+*/
+
 #include "cgproject.h"
 
 GLfloat door_angle = 0;
@@ -41,7 +49,7 @@ void door(GLfloat x, GLfloat y, GLfloat z, GLfloat angle) {
         glPushMatrix();
         {
             glScalef(8, 1, 0.3);
-            draw_cube(1, true);
+            draw_cube(1, use_grid);
         }
         glPopMatrix();
 
@@ -52,7 +60,7 @@ void door(GLfloat x, GLfloat y, GLfloat z, GLfloat angle) {
             glTranslatef(-2.5, 2, 0);
             glScalef(3, 3, 0.3);
 
-            draw_cube(1, true);
+            draw_cube(1, use_grid);
         }
         glPopMatrix();
 
@@ -62,7 +70,7 @@ void door(GLfloat x, GLfloat y, GLfloat z, GLfloat angle) {
         {
             glTranslatef(2.5, 2, 0);
             glScalef(3, 3, 0.3);
-            draw_cube(1, true);
+            draw_cube(1, use_grid);
         }
         glPopMatrix();
 
@@ -77,7 +85,7 @@ void door(GLfloat x, GLfloat y, GLfloat z, GLfloat angle) {
             glRotatef(cat_door_angle, 1.0f, 0.0f, 0.0f);
             glTranslatef(0, -1.5, shift_rotation_center);
             glScalef(2, 3, 0.3);
-            draw_cube(1, true);
+            draw_cube(1, use_grid);
         }
         glPopMatrix();
 
@@ -88,8 +96,7 @@ void door(GLfloat x, GLfloat y, GLfloat z, GLfloat angle) {
         {
             glTranslatef(0, 4, 0);
             glScalef(8, 1, 0.3);
-
-            draw_cube(1, true);
+            draw_cube(1, use_grid);
         }
         glPopMatrix();
 
@@ -99,7 +106,7 @@ void door(GLfloat x, GLfloat y, GLfloat z, GLfloat angle) {
         {
             glTranslatef(-3.25, 6.5, 0);
             glScalef(1.5, 4, 0.3);
-            draw_cube(1, true);
+            draw_cube(1, use_grid);
         }
         glPopMatrix();
 
@@ -109,7 +116,7 @@ void door(GLfloat x, GLfloat y, GLfloat z, GLfloat angle) {
         {
             glTranslatef(-1.5, 6.5, 0);
             glScalef(2, 4, 0.3);
-            draw_cube(1, true);
+            draw_cube(1, use_grid);
         }
         glPopMatrix();
 
@@ -119,7 +126,7 @@ void door(GLfloat x, GLfloat y, GLfloat z, GLfloat angle) {
         {
             glTranslatef(0, 6.5, 0);
             glScalef(1, 4, 0.3);
-            draw_cube(1, true);
+            draw_cube(1, use_grid);
         }
         glPopMatrix();
 
@@ -130,7 +137,7 @@ void door(GLfloat x, GLfloat y, GLfloat z, GLfloat angle) {
             glTranslatef(1.5, 6.5, 0);
             glScalef(2, 4, 0.3);
 
-            draw_cube(1, true);
+            draw_cube(1, use_grid);
         }
         glPopMatrix();
 
@@ -140,8 +147,7 @@ void door(GLfloat x, GLfloat y, GLfloat z, GLfloat angle) {
         {
             glTranslatef(3.25, 6.5, 0);
             glScalef(1.5, 4, 0.3);
-
-            draw_cube(1, true);
+            draw_cube(1, use_grid);
         }
         glPopMatrix();
 
@@ -151,7 +157,7 @@ void door(GLfloat x, GLfloat y, GLfloat z, GLfloat angle) {
         {
             glTranslatef(0, 9.5, 0);
             glScalef(8, 2, 0.3);
-            draw_cube(1, true);
+            draw_cube(1, use_grid);
         }
         glPopMatrix();
 
@@ -172,8 +178,7 @@ void door(GLfloat x, GLfloat y, GLfloat z, GLfloat angle) {
         {
             glTranslatef(4 - latch_dx, 9.5, 0);
             glScalef(0.3, 0.3, 0.05);
-
-            draw_cube(1, true);
+            draw_cube(1, use_grid);
         }
         glPopMatrix();
 
@@ -199,7 +204,7 @@ void door(GLfloat x, GLfloat y, GLfloat z, GLfloat angle) {
             {
                 glTranslatef(-3.1, 11.5 + 2.5 * i, 0);
                 glScalef(1.8, 2, 0.3);
-                draw_cube(1, true);
+                draw_cube(1, use_grid);
             }
             glPopMatrix();
 
@@ -208,7 +213,7 @@ void door(GLfloat x, GLfloat y, GLfloat z, GLfloat angle) {
             {
                 glTranslatef(3.1, 11.5 + 2.5 * i, 0);
                 glScalef(1.8, 2, 0.3);
-                draw_cube(1, true);
+                draw_cube(1, use_grid);
             }
             glPopMatrix();
 
@@ -218,7 +223,7 @@ void door(GLfloat x, GLfloat y, GLfloat z, GLfloat angle) {
             {
                 glTranslatef(0, 11.5 + 2.5 * i, 0);
                 glScalef(0.4, 2, 0.3);
-                draw_cube(1, true);
+                draw_cube(1, use_grid);
             }
             glPopMatrix();
 
@@ -228,7 +233,7 @@ void door(GLfloat x, GLfloat y, GLfloat z, GLfloat angle) {
             {
                 glTranslatef(0, 12.75 + 2.5 * i, 0);
                 glScalef(8, 0.5, 0.3);
-                draw_cube(1, true);
+                draw_cube(1, use_grid);
             }
             glPopMatrix();
         }
@@ -239,24 +244,24 @@ void door(GLfloat x, GLfloat y, GLfloat z, GLfloat angle) {
             glTranslatef(0, 18.25, 0);
             glScalef(8, 0.5, 0.3);
             select_material(DEFAULT);
-            draw_cube(1, true);
+            draw_cube(1, use_grid);
         }
         glPopMatrix();
 
         // Glass Windows
-        glBindTexture(GL_TEXTURE_2D, texture[2]);
-        
+      
         glEnable(GL_COLOR_MATERIAL);
         glColorMaterial(GL_FRONT_AND_BACK, GL_DIFFUSE);
         glColor4f(0.10754, 0.10754, 0.2054, 0.3);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+        glBindTexture(GL_TEXTURE_2D, texture[2]);
         for (int i = 0; i < 3; ++i) {
             // Left Window
             glPushMatrix();
             {
                 glTranslatef(-1.2, 11.5 + 2.5 * i, 0);
                 glScalef(2, 2, 0.3);
-                draw_cube(1, true);
+                draw_cube(1, use_grid);
             }
             glPopMatrix();
 
@@ -265,7 +270,7 @@ void door(GLfloat x, GLfloat y, GLfloat z, GLfloat angle) {
             {
                 glTranslatef(1.2, 11.5 + 2.5 * i, 0);
                 glScalef(2, 2, 0.3);
-                draw_cube(1, true);
+                draw_cube(1, use_grid);
             }
             glPopMatrix();
         }

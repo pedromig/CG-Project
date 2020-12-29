@@ -1,6 +1,12 @@
-#include "cgproject.h"
+/**
+ * Licenciatura em Engenharia Informática | Faculdade de Ciências e Tecnologia da Universidade de Coimbra
+ * Projeto de Computação Gráfica - Porta 2020/2021
+ *
+ * 2018283166 Pedro Miguel Duque Rodrigues
+ *   
+*/
 
-// Camera Properties
+#include "cgproject.h"
 
 // Camera Settings
 GLfloat camera_radius = 25.0f;
@@ -16,7 +22,7 @@ bool light_bulb_on = false;
 GLfloat light_bulb_intensity = 1;
 GLfloat light_bulb_r = 0.5f, light_bulb_g = 0.5f, light_bulb_b = 0.5f;
 
-GLfloat light_bulb_position[4] = {4.0f, 6.0f, 10.0f, 1.0f};
+GLfloat light_bulb_position[4] = {4.0f, 7.0f, 10.0f, 1.0f};
 GLfloat light_bulb_ambient[4] = {0.0f, 0.0f, 0.0f, 1.0f};
 GLfloat light_bulb_specular[4] = {light_bulb_r, light_bulb_g, light_bulb_b, 1.0f};
 GLfloat light_bulb_difuse[4] = {light_bulb_r, light_bulb_g, light_bulb_b, 1.0f};
@@ -26,7 +32,7 @@ bool spotlight_on = false;
 GLfloat spotlight_intensity = 1;
 GLfloat spotlight_r = 0.5, spotlight_g = 0.5, spotlight_b = 0.5;
 
-GLfloat spotlight_position[4] = {4.0f, 6.0f, -10.0f, 1.0f};
+GLfloat spotlight_position[4] = {4.0f, 7.0f, -10.0f, 1.0f};
 GLfloat spotlight_direction[4] = {0.0f, 0.0f, 1.0f, 0.0f};
 
 GLfloat spotlight_ambient[4] = {0.0f, 0.0f, 0.0f, 1.0f};
@@ -41,22 +47,23 @@ GLfloat spotlight_kl = 0.05f;
 GLfloat spotlight_kq = 0.0f;
 
 GLfloat ks = 0.25;
+bool use_grid = true;
 
 // Cube general properties
 static GLint faces[6][4] = {
-    {3, 0, 1, 2},
+    {0, 1, 2, 3},
+    {3, 2, 6, 7},
+    {7, 6, 5, 4},
     {4, 5, 1, 0},
-    {6, 5, 4, 7},
-    {6, 7, 3, 2},
-    {7, 4, 0, 3},
     {5, 6, 2, 1},
+    {7, 4, 0, 3},
 };
 
 static GLfloat normals[6][3] = {
+    {-1.0f, 0.0f, 0.0f},
     {0.0f, 1.0f, 0.0f},
     {1.0f, 0.0f, 0.0f},
     {0.0f, -1.0f, 0.0f},
-    {-1.0f, 0.0f, 0.0f},
     {0.0f, 0.0f, 1.0f},
     {0.0f, 0.0f, -1.0f},
 };
@@ -67,13 +74,15 @@ static GLfloat cube_grid_rotate[6][4] = {
     {90.0f, 1.0f, 0.0f, 0.0f},
     {90.0f, 0.0f, -1.0f, 0.0f},
     {0.0f, 0.0f, 0.0f, 0.0f},
-    {180.0f, 0.0f, 1.0f, 0.0f}};
+    {180.0f, 0.0f, 1.0f, 0.0f},
+};
 
 static GLfloat texture_coordinates[4][2] = {
     {0.0f, 0.0f},
     {1.0f, 0.0f},
     {1.0f, 1.0f},
-    {0.0f, 1.0f}};
+    {0.0f, 1.0f},
+};
 
 void debug_axis() {
     glDisable(GL_LIGHTING);
@@ -508,6 +517,12 @@ void ascii_keyboard_callback(unsigned char key, int x, int y) {
             spotlight_position[1] += 0.1f;
             break;
         }
+
+        case 'G': {
+            use_grid = !use_grid;
+            break;
+        }
+
         case ESC_KEY:
             exit(EXIT_SUCCESS);
             break;

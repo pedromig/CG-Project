@@ -1,3 +1,11 @@
+/**
+ * Licenciatura em Engenharia Informática | Faculdade de Ciências e Tecnologia da Universidade de Coimbra
+ * Projeto de Computação Gráfica - Porta 2020/2021
+ *
+ * 2018283166 Pedro Miguel Duque Rodrigues
+ *   
+*/
+
 #include "cgproject.h"
 
 // Texture Array
@@ -21,7 +29,7 @@ void draw_callback(void) {
     update_light(GL_LIGHT0);
     update_light(GL_LIGHT1);
     door(0.0, 0.0, 0.0, 0.0);
-
+    
     glutSwapBuffers();
 }
 
@@ -43,11 +51,11 @@ int main(int argc, char *argv[]) {
     glEnable(GL_BLEND);
 
     // Ambient Lighting Setup
-    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, (const GLfloat[4]){0.1f, 0.1f, 0.1f, 0.1f});
+    glLightModelfv(GL_LIGHT_MODEL_AMBIENT, (const GLfloat[4]){0.2f, 0.2f, 0.2f, 0.2f});
     update_light(GL_LIGHT0);
     update_light(GL_LIGHT1);
 
-    // Texture LoadingITION
+    // Texture Loading
     load_texture(&texture[0], "../resources/cat_door.bmp");
     load_texture(&texture[1], "../resources/wood.bmp");
     load_texture(&texture[2], "../resources/glass.bmp");

@@ -1,3 +1,11 @@
+/**
+ * Licenciatura em Engenharia Informática | Faculdade de Ciências e Tecnologia da Universidade de Coimbra
+ * Projeto de Computação Gráfica - Porta 2020/2021
+ *
+ * 2018283166 Pedro Miguel Duque Rodrigues
+ *   
+*/
+
 #ifndef __GL_UTILS
 #define __GL_UTILS
 
@@ -20,6 +28,7 @@ extern GLfloat spotlight_r, spotlight_g, spotlight_b;
 
 // Door Handle Specular component
 extern GLfloat ks;
+extern bool use_grid;
 
 // Materials
 typedef enum Material {
