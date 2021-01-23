@@ -142,8 +142,8 @@ void update_camera() {
     if (camera[1] > WORLD_XYZ_FAR) camera[1] = WORLD_XYZ_FAR;
     if (camera[1] < -WORLD_XYZ_FAR) camera[1] = -WORLD_XYZ_FAR;
 
-    camera[0] = (GLfloat) (camera_radius * cos(camera_angle));
-    camera[2] = (GLfloat) (camera_radius * sin(camera_angle));
+    camera[0] = (GLfloat)(camera_radius * cos(camera_angle));
+    camera[2] = (GLfloat)(camera_radius * sin(camera_angle));
 }
 
 void non_ascii_keyboard_callback(int key, int x, int y) {
@@ -168,7 +168,7 @@ void non_ascii_keyboard_callback(int key, int x, int y) {
 void ascii_keyboard_callback(unsigned char key, int x, int y) {
 
     switch (toupper(key)) {
-     
+
         case 'Z': {
             if (camera_radius > WORLD_XYZ_NEAR) {
                 camera_radius -= ZOOM_SPEED;
@@ -176,7 +176,7 @@ void ascii_keyboard_callback(unsigned char key, int x, int y) {
             }
             break;
         }
-       
+
         case 'X':
             camera_radius += ZOOM_SPEED;
             update_camera();
@@ -254,8 +254,10 @@ void draw_callback() {
     }
     glPopMatrix();
 
-     glUseProgramObjectARB(0);
+#ifdef DEBUG
+    glUseProgramObjectARB(0);
     debug_axis();
+#endif
 
     glutSwapBuffers();
 }
